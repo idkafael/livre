@@ -1503,164 +1503,915 @@ export default function IndexContent({ htmlContent }: IndexContentProps) {
 
   return (
     <>
-      {/* Estilos responsivos para mobile */}
+      {/* Estilos Mobile-First baseados no design do Mercado Livre */}
       <style dangerouslySetInnerHTML={{
         __html: `
-          /* Estilos globais para responsividade */
+          /* ============================================
+             MOBILE-FIRST DESIGN - MERCADO LIVRE STYLE
+             ============================================ */
+          
+          /* Reset e base mobile-first */
           * {
             box-sizing: border-box !important;
+            -webkit-tap-highlight-color: transparent;
+          }
+          
+          html {
+            -webkit-text-size-adjust: 100% !important;
+            -ms-text-size-adjust: 100% !important;
+            font-size: 16px !important;
           }
           
           html, body {
             width: 100% !important;
             max-width: 100vw !important;
             overflow-x: hidden !important;
+            margin: 0 !important;
+            padding: 0 !important;
           }
           
-          /* Responsividade Mobile - Melhorias adicionais */
-          @media (max-width: 768px) {
-            /* Container principal */
-            .ui-pdp-container,
-            .ui-pdp-container__row,
-            .ui-pdp,
-            main,
-            #root-app {
-              flex-direction: column !important;
-              padding: 0 12px !important;
-              width: 100% !important;
-              max-width: 100% !important;
-              margin: 0 !important;
-            }
-            
-            /* Garantir que o body não ultrapasse */
-            body > div,
-            #__next,
-            #root {
-              width: 100% !important;
-              max-width: 100vw !important;
-              overflow-x: hidden !important;
-            }
-            
-            /* Colunas */
-            .ui-pdp-container__col {
-              width: 100% !important;
-              max-width: 100% !important;
-              padding-left: 0 !important;
-              padding-right: 0 !important;
-            }
-            
-            /* Galeria de imagens */
-            .ui-pdp-gallery,
-            .ui-pdp-gallery__column {
-              width: 100% !important;
-              max-width: 100% !important;
-            }
-            
-            .ui-pdp-gallery__figure__image {
-              max-width: 100% !important;
-              height: auto !important;
-            }
-            
-            /* Box de compra */
-            .ui-pdp-box-container,
-            .ui-pdp-box__container,
-            .ui-pdp-buy-box-offers__desktop {
-              width: 100% !important;
-              max-width: 100% !important;
-              margin: 0 !important;
-              padding: 12px !important;
-              position: relative !important;
-            }
-            
-            /* Preço */
-            .ui-pdp-price {
-              font-size: 28px !important;
+          body {
+            font-family: "Proxima Nova", -apple-system, Roboto, Arial, sans-serif !important;
+            background-color: #ffffff !important;
+            color: rgba(0, 0, 0, 0.9) !important;
+            line-height: 1.5 !important;
+          }
+          
+          /* ============================================
+             MOBILE STYLES (default - mobile-first)
+             ============================================ */
+          
+          /* Container principal - Layout vertical */
+          .ui-pdp-container,
+          .ui-pdp-container--pdp,
+          .ui-pdp-container--top,
+          main,
+          #root-app {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: #ffffff !important;
+          }
+          
+          /* Rows - sempre coluna no mobile */
+          .ui-pdp-container__row {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            flex-wrap: nowrap !important;
+          }
+          
+          /* Colunas - 100% width no mobile */
+          .ui-pdp-container__col,
+          .ui-pdp-container__col.col-1,
+          .ui-pdp-container__col.col-2,
+          .ui-pdp-container__col.col-3,
+          .ui-pdp-container__col.col-6 {
+            width: 100% !important;
+            max-width: 100% !important;
+            flex: 1 1 100% !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            margin: 0 !important;
+          }
+          
+          /* Header/Navegação - Mobile otimizado */
+          .nav-header,
+          .nav-header-plus,
+          .nav-bounds,
+          .nav-bounds-with-cart {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 8px 12px !important;
+            background: #fff159 !important;
+            box-shadow: 0 1px 0 0 rgba(0,0,0,0.1) !important;
+          }
+          
+          .nav-area {
+            width: 100% !important;
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+          }
+          
+          .nav-search {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 8px 0 !important;
+            order: 2 !important;
+          }
+          
+          .nav-search-input {
+            width: 100% !important;
+            font-size: 16px !important;
+            padding: 10px 12px !important;
+            border-radius: 2px !important;
+            border: 0 rgba(0,0,0,0.2) !important;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2) !important;
+          }
+          
+          .nav-menu-list {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 4px !important;
+            font-size: 12px !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+          }
+          
+          .nav-menu-item {
+            font-size: 12px !important;
+            padding: 6px 8px !important;
+            white-space: nowrap !important;
+          }
+          
+          /* Breadcrumb - Mobile compacto */
+          .ui-pdp-breadcrumb {
+            font-size: 12px !important;
+            padding: 8px 12px !important;
+            background: #ffffff !important;
+            border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+          }
+          
+          .andes-breadcrumb {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 4px !important;
+            font-size: 12px !important;
+          }
+          
+          /* Galeria de imagens - Mobile full width */
+          .ui-pdp-gallery,
+          .ui-pdp-gallery__column {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            position: relative !important;
+          }
+          
+          .ui-pdp-gallery__figure {
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+          
+          .ui-pdp-gallery__figure__image {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            display: block !important;
+            object-fit: contain !important;
+          }
+          
+          .ui-pdp-thumbnail {
+            width: 44px !important;
+            height: 44px !important;
+            flex-shrink: 0 !important;
+          }
+          
+          /* Indicadores de imagem */
+          .ui-pdp-gallery__column__variation-picture {
+            position: relative !important;
+            width: 100% !important;
+            padding-bottom: 0 !important;
+          }
+          
+          /* Título do produto - Mobile */
+          .ui-pdp-header__title,
+          .ui-pdp-title,
+          h1.ui-pdp-title {
+            font-size: 22px !important;
+            line-height: 1.3 !important;
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin: 12px 16px 8px !important;
+            padding: 0 !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+          }
+          
+          .ui-pdp-header__subtitle {
+            font-size: 14px !important;
+            color: rgba(0,0,0,0.55) !important;
+            margin: 0 16px 12px !important;
+          }
+          
+          /* Preço - Mobile destacado */
+          .ui-pdp-price,
+          .ui-pdp-price__main-container {
+            margin: 0 16px 8px !important;
+            padding: 0 !important;
+          }
+          
+          .ui-pdp-price__part {
+            display: flex !important;
+            align-items: baseline !important;
+            gap: 8px !important;
+            flex-wrap: wrap !important;
+          }
+          
+          .ui-pdp-price__second-line {
+            font-size: 36px !important;
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.9) !important;
+            line-height: 1 !important;
+            margin: 0 !important;
+          }
+          
+          .andes-money-amount__fraction {
+            font-size: 36px !important;
+            font-weight: 400 !important;
+          }
+          
+          .andes-money-amount__cents {
+            font-size: 18px !important;
+            vertical-align: super !important;
+          }
+          
+          .ui-pdp-price__original-value {
+            font-size: 16px !important;
+            color: rgba(0,0,0,0.55) !important;
+            text-decoration: line-through !important;
+            margin-right: 8px !important;
+          }
+          
+          .ui-pdp-price__second-line__label {
+            font-size: 18px !important;
+            color: #00a650 !important;
+            font-weight: 400 !important;
+            margin-left: 8px !important;
+          }
+          
+          .andes-money-amount__discount {
+            font-size: 18px !important;
+            color: #00a650 !important;
+            font-weight: 400 !important;
+          }
+          
+          /* Variações (Cor, Tamanho) - Mobile */
+          .ui-pdp-variations {
+            width: 100% !important;
+            margin: 16px 0 !important;
+            padding: 0 16px !important;
+          }
+          
+          .ui-pdp-variations__picker {
+            width: 100% !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .ui-pdp-variations__title {
+            font-size: 16px !important;
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin-bottom: 12px !important;
+          }
+          
+          .ui-pdp-variations__selected-label {
+            font-size: 16px !important;
+            color: rgba(0,0,0,0.9) !important;
+            font-weight: 400 !important;
+          }
+          
+          .ui-pdp-variations__picker-default-container {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+            margin-top: 8px !important;
+          }
+          
+          .ui-pdp-thumbnail.ui-pdp-variations--thumbnail {
+            width: 56px !important;
+            height: 56px !important;
+            border: 2px solid transparent !important;
+            border-radius: 4px !important;
+            padding: 2px !important;
+          }
+          
+          .ui-pdp-thumbnail.ui-pdp-variations--thumbnail.ui-pdp-thumbnail--SELECTED {
+            border-color: #3483fa !important;
+          }
+          
+          /* Box de compra - Mobile fixo no bottom */
+          .ui-pdp-buy-box-offers__desktop,
+          .ui-pdp-box-container,
+          .ui-pdp-box__container {
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            background: #ffffff !important;
+            box-shadow: 0 -1px 4px 0 rgba(0,0,0,0.15) !important;
+            padding: 12px 16px !important;
+            z-index: 1000 !important;
+            margin: 0 !important;
+          }
+          
+          .ui-pdp-buy-box-offers__offer-list {
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+          
+          .ui-pdp-buy-box-offers__offer-list-item {
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+          }
+          
+          /* Botões de ação - Mobile full width */
+          .ui-pdp-actions,
+          .ui-pdp-actions__container {
+            width: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 8px !important;
+            margin-top: 12px !important;
+          }
+          
+          .ui-pdp-action--primary,
+          .ui-pdp-action--secondary,
+          .andes-button {
+            width: 100% !important;
+            min-height: 48px !important;
+            padding: 14px 24px !important;
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            border-radius: 6px !important;
+            border: none !important;
+            cursor: pointer !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            transition: all 0.2s !important;
+            margin: 0 !important;
+          }
+          
+          .ui-pdp-action--primary,
+          .andes-button--loud {
+            background: #3483fa !important;
+            color: #ffffff !important;
+          }
+          
+          .ui-pdp-action--primary:hover,
+          .andes-button--loud:hover {
+            background: #2968c8 !important;
+          }
+          
+          .ui-pdp-action--secondary,
+          .andes-button--quiet {
+            background: rgba(65,137,230,.15) !important;
+            color: #3483fa !important;
+          }
+          
+          .ui-pdp-action--secondary:hover,
+          .andes-button--quiet:hover {
+            background: rgba(65,137,230,.2) !important;
+          }
+          
+          /* Frete - Mobile */
+          .ui-pdp-shipping,
+          .ui-pdp-media.ui-pdp-shipping {
+            margin: 12px 16px !important;
+            padding: 12px !important;
+            background: #ffffff !important;
+            border-radius: 4px !important;
+          }
+          
+          .ui-pdp-shipping--content-action {
+            background: transparent !important;
+            padding: 0 !important;
+          }
+          
+          .ui-pdp-media__title {
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            color: #00a650 !important;
+            margin-bottom: 4px !important;
+          }
+          
+          .ui-pdp-media__text {
+            font-size: 14px !important;
+            color: rgba(0,0,0,0.55) !important;
+            line-height: 1.4 !important;
+          }
+          
+          /* Estoque - Mobile */
+          .ui-pdp-stock-information {
+            margin: 12px 16px !important;
+            padding: 0 !important;
+          }
+          
+          .ui-pdp-stock-information__title {
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin-bottom: 8px !important;
+          }
+          
+          /* Quantidade - Mobile */
+          .ui-pdp-buybox__quantity {
+            margin: 12px 16px !important;
+            padding: 0 !important;
+          }
+          
+          .ui-pdp-buybox__quantity__trigger {
+            width: 100% !important;
+            padding: 12px !important;
+            border: 1px solid rgba(0,0,0,0.25) !important;
+            border-radius: 4px !important;
+            background: #ffffff !important;
+            font-size: 14px !important;
+          }
+          
+          /* Vendedor - Mobile */
+          .ui-pdp-seller {
+            margin: 16px !important;
+            padding: 16px !important;
+            background: #ffffff !important;
+            border-radius: 4px !important;
+            border: 1px solid rgba(0,0,0,0.1) !important;
+          }
+          
+          .ui-pdp-seller__header {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            margin-bottom: 12px !important;
+          }
+          
+          .ui-pdp-seller__header__image-container {
+            width: 56px !important;
+            height: 56px !important;
+            flex-shrink: 0 !important;
+          }
+          
+          .ui-pdp-seller__label-sold {
+            font-size: 12px !important;
+            color: rgba(0,0,0,0.55) !important;
+          }
+          
+          .ui-pdp-seller__label-text-with-icon {
+            font-size: 14px !important;
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.9) !important;
+          }
+          
+          /* Benefícios - Mobile */
+          .ui-pdp-benefits {
+            margin: 16px !important;
+            padding: 0 !important;
+            list-style: none !important;
+          }
+          
+          .ui-pdp-benefits__item {
+            margin-bottom: 12px !important;
+            padding: 0 !important;
+          }
+          
+          .ui-pdp-media {
+            display: flex !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+          }
+          
+          .ui-pdp-media__figure {
+            flex-shrink: 0 !important;
+            width: 20px !important;
+            height: 20px !important;
+          }
+          
+          .ui-pdp-media__body {
+            flex: 1 !important;
+          }
+          
+          .ui-pdp-media__title {
+            font-size: 14px !important;
+            line-height: 1.4 !important;
+            color: rgba(0,0,0,0.55) !important;
+          }
+          
+          /* Características destacadas - Mobile */
+          .ui-vpp-highlighted-specs {
+            margin: 16px !important;
+            padding: 16px !important;
+            background: #ffffff !important;
+            border-radius: 4px !important;
+          }
+          
+          .highlighted-features-title {
+            font-size: 18px !important;
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin-bottom: 16px !important;
+          }
+          
+          .ui-vpp-highlighted-specs__features-list {
+            list-style: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+          }
+          
+          .ui-vpp-highlighted-specs__features-list-item {
+            font-size: 14px !important;
+            line-height: 1.6 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin-bottom: 12px !important;
+            padding-left: 20px !important;
+            position: relative !important;
+          }
+          
+          .ui-vpp-highlighted-specs__features-list-item::before {
+            content: "•" !important;
+            position: absolute !important;
+            left: 0 !important;
+            color: #3483fa !important;
+            font-size: 20px !important;
+          }
+          
+          /* Características completas - Mobile */
+          .highlighted-specs-title {
+            font-size: 20px !important;
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin: 16px 16px 12px !important;
+          }
+          
+          .ui-vpp-striped-specs__table {
+            margin: 0 16px 24px !important;
+          }
+          
+          .ui-vpp-striped-specs__header {
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin-bottom: 12px !important;
+            padding-bottom: 8px !important;
+            border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+          }
+          
+          .andes-table {
+            width: 100% !important;
+            font-size: 14px !important;
+            border-collapse: collapse !important;
+          }
+          
+          .andes-table th {
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.55) !important;
+            text-align: left !important;
+            padding: 8px 12px 8px 0 !important;
+            width: 40% !important;
+          }
+          
+          .andes-table td {
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.9) !important;
+            padding: 8px 0 !important;
+          }
+          
+          /* Descrição - Mobile */
+          .ui-pdp-description {
+            margin: 16px !important;
+            padding: 16px !important;
+            background: #ffffff !important;
+            border-radius: 4px !important;
+          }
+          
+          .ui-pdp-description__title {
+            font-size: 20px !important;
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin-bottom: 16px !important;
+          }
+          
+          .ui-pdp-description__content {
+            font-size: 14px !important;
+            line-height: 1.6 !important;
+            color: rgba(0,0,0,0.9) !important;
+          }
+          
+          /* Perguntas e Respostas - Mobile */
+          .ui-pdp-qadb {
+            margin: 16px !important;
+            padding: 0 !important;
+          }
+          
+          .ui-pdp-qadb__title {
+            font-size: 20px !important;
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin-bottom: 16px !important;
+          }
+          
+          .ui-pdp-qadb__search-bar {
+            margin-bottom: 16px !important;
+          }
+          
+          .ui-pdp-qadb__search-bar__input {
+            width: 100% !important;
+            padding: 12px !important;
+            font-size: 14px !important;
+            border: 1px solid rgba(0,0,0,0.25) !important;
+            border-radius: 4px !important;
+          }
+          
+          .ui-pdp-qadb__questions-list__question {
+            margin-bottom: 16px !important;
+            padding-bottom: 16px !important;
+            border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+          }
+          
+          .ui-pdp-qadb__questions-list__question__label {
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin-bottom: 8px !important;
+            display: block !important;
+          }
+          
+          .ui-pdp-qadb__questions-list__answer-item__answer {
+            font-size: 14px !important;
+            line-height: 1.6 !important;
+            color: rgba(0,0,0,0.55) !important;
+            margin-top: 8px !important;
+          }
+          
+          /* Reviews/Opiniões - Mobile */
+          .ui-review-capability {
+            margin: 16px !important;
+            padding: 0 !important;
+          }
+          
+          .ui-review-capability__header__title {
+            font-size: 20px !important;
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin-bottom: 16px !important;
+          }
+          
+          .ui-review-capability__rating__average {
+            font-size: 48px !important;
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.9) !important;
+            line-height: 1 !important;
+          }
+          
+          .ui-review-capability__rating__label {
+            font-size: 14px !important;
+            color: rgba(0,0,0,0.55) !important;
+            margin-top: 4px !important;
+          }
+          
+          .ui-review-capability-comments__comment {
+            margin-bottom: 24px !important;
+            padding-bottom: 24px !important;
+            border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+          }
+          
+          .ui-review-capability-comments__comment__rating {
+            margin-bottom: 8px !important;
+          }
+          
+          .ui-review-capability-comments__comment__date {
+            font-size: 12px !important;
+            color: rgba(0,0,0,0.55) !important;
+          }
+          
+          .ui-review-capability-comments__comment__content {
+            font-size: 14px !important;
+            line-height: 1.6 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin-top: 8px !important;
+          }
+          
+          /* Espaçamento para botão fixo */
+          body {
+            padding-bottom: 120px !important;
+          }
+          
+          /* Meios de pagamento - Mobile */
+          .ui-vip-payment_methods {
+            margin: 16px !important;
+            padding: 16px !important;
+            background: #ffffff !important;
+            border-radius: 4px !important;
+          }
+          
+          .ui-vip-payment_methods__title {
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            color: rgba(0,0,0,0.9) !important;
+            margin-bottom: 12px !important;
+          }
+          
+          .ui-pdp-payment-icon {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+          }
+          
+          .ui-pdp-payment-icon__container {
+            width: 40px !important;
+            height: 24px !important;
+          }
+          
+          /* Promoções e tags - Mobile */
+          .ui-pdp-promotions-pill {
+            margin: 8px 16px !important;
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+          }
+          
+          .ui-pdp-promotions-pill-label {
+            font-size: 12px !important;
+            padding: 4px 8px !important;
+            border-radius: 4px !important;
+            font-weight: 600 !important;
+          }
+          
+          /* Footer - Mobile */
+          .nav-footer,
+          .nav-footer-seo {
+            margin-top: 32px !important;
+            padding: 16px !important;
+            background: #ffffff !important;
+            font-size: 12px !important;
+          }
+          
+          /* Ocultar elementos desktop */
+          .ui-pdp-desktop-only,
+          .ui-box-component-pdp__visible--desktop {
+            display: none !important;
+          }
+          
+          /* Ajustes para telas muito pequenas (320px - 480px) */
+          @media (max-width: 480px) {
+            .ui-pdp-header__title,
+            .ui-pdp-title {
+              font-size: 18px !important;
+              margin: 8px 12px 6px !important;
             }
             
             .ui-pdp-price__second-line {
-              font-size: 14px !important;
+              font-size: 32px !important;
             }
             
-            /* Título do produto */
-            .ui-pdp-header__title,
-            .ui-pdp-title {
-              font-size: 20px !important;
-              line-height: 1.3 !important;
-              margin-bottom: 12px !important;
-              word-wrap: break-word !important;
+            .andes-money-amount__fraction {
+              font-size: 32px !important;
             }
             
-            /* Botões de ação */
+            .ui-pdp-price {
+              margin: 0 12px 6px !important;
+            }
+            
+            .ui-pdp-variations,
+            .ui-pdp-shipping,
+            .ui-pdp-stock-information,
+            .ui-pdp-buybox__quantity,
+            .ui-pdp-seller,
+            .ui-vpp-highlighted-specs,
+            .ui-pdp-description,
+            .ui-pdp-qadb,
+            .ui-review-capability {
+              margin-left: 12px !important;
+              margin-right: 12px !important;
+            }
+            
             .ui-pdp-action--primary,
             .ui-pdp-action--secondary,
             .andes-button {
-              width: 100% !important;
-              padding: 14px 20px !important;
-              font-size: 16px !important;
-              margin-bottom: 12px !important;
+              padding: 12px 20px !important;
+              font-size: 15px !important;
             }
             
-            /* Navegação */
-            .nav-header,
-            .nav-bounds,
-            .nav-header-plus {
-              padding: 0 12px !important;
-              width: 100% !important;
-              max-width: 100% !important;
-            }
-            
-            .nav-area {
-              width: 100% !important;
-              flex-wrap: wrap !important;
-            }
-            
-            .nav-search {
-              width: 100% !important;
-              max-width: 100% !important;
-              margin: 8px 0 !important;
-            }
-            
-            .nav-search-input {
-              font-size: 14px !important;
+            .ui-pdp-buy-box-offers__desktop,
+            .ui-pdp-box-container,
+            .ui-pdp-box__container {
               padding: 10px 12px !important;
-              width: 100% !important;
             }
             
-            .nav-menu-list {
-              flex-wrap: wrap !important;
-              font-size: 12px !important;
+            body {
+              padding-bottom: 100px !important;
+            }
+          }
+          
+          /* Ajustes para landscape mobile */
+          @media (max-width: 768px) and (orientation: landscape) {
+            .ui-pdp-buy-box-offers__desktop,
+            .ui-pdp-box-container,
+            .ui-pdp-box__container {
+              position: relative !important;
+              box-shadow: none !important;
+              border-top: 1px solid rgba(0,0,0,0.1) !important;
             }
             
-            .nav-menu-item {
-              font-size: 12px !important;
-              padding: 4px 8px !important;
+            body {
+              padding-bottom: 0 !important;
+            }
+          }
+          
+          /* Desktop - Apenas ajustes mínimos quando necessário */
+          @media (min-width: 769px) {
+            /* Restaurar layout desktop apenas se necessário */
+            .ui-pdp-container__row {
+              flex-direction: row !important;
             }
             
-            /* Breadcrumb */
-            .ui-pdp-breadcrumb {
-              font-size: 12px !important;
-              padding: 8px 0 !important;
+            .ui-pdp-container__col.col-1 {
+              width: 8.33333% !important;
             }
             
-            /* Variações */
-            .ui-pdp-variations {
-              width: 100% !important;
+            .ui-pdp-container__col.col-2 {
+              width: 16.66667% !important;
             }
             
-            .ui-pdp-variations__picker {
-              width: 100% !important;
-              margin-bottom: 16px !important;
+            .ui-pdp-container__col.col-3 {
+              width: 25% !important;
             }
             
-            /* Descrição */
-            .ui-pdp-description {
-              font-size: 14px !important;
-              line-height: 1.6 !important;
-              padding: 12px !important;
+            .ui-pdp-container__col.col-6 {
+              width: 50% !important;
             }
             
-            /* Características */
-            .ui-vpp-highlighted-specs,
+            .ui-pdp-buy-box-offers__desktop,
+            .ui-pdp-box-container,
+            .ui-pdp-box__container {
+              position: relative !important;
+              box-shadow: none !important;
+            }
+            
+            body {
+              padding-bottom: 0 !important;
+            }
+            
+            .ui-pdp-desktop-only {
+              display: block !important;
+            }
+          }
+          
+          /* Imagens responsivas - garantir que todas sejam responsivas */
+          img {
+            max-width: 100% !important;
+            height: auto !important;
+            display: block !important;
+          }
+          
+          /* Links e botões - garantir área de toque adequada */
+          a, button, [role="button"] {
+            min-height: 44px !important;
+            min-width: 44px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+          
+          /* Inputs e selects - evitar zoom no iOS */
+          input[type="text"],
+          input[type="email"],
+          input[type="tel"],
+          input[type="number"],
+          select,
+          textarea {
+            font-size: 16px !important;
+            -webkit-appearance: none !important;
+            appearance: none !important;
+          }
+          
+          /* Scroll suave */
+          html {
+            scroll-behavior: smooth !important;
+          }
+          
+          /* Garantir que elementos com position sticky funcionem */
+          .ui-pdp--sticky-wrapper {
+            position: -webkit-sticky !important;
+            position: sticky !important;
+          }
+          
+          /* Carrosséis e sliders - touch-friendly */
+          .andes-carousel-snapped__container,
+          .andes-carousel-snapped__wrapper {
+            -webkit-overflow-scrolling: touch !important;
+            overflow-x: auto !important;
+            scroll-snap-type: x mandatory !important;
+          }
+          
+          .andes-carousel-snapped__item {
+            scroll-snap-align: start !important;
+            flex-shrink: 0 !important;
+          }
+          
+          /* Estilos adicionais para elementos específicos */
+          .ui-vpp-highlighted-specs,
             .ui-vpp-striped-specs {
               font-size: 14px !important;
               padding: 12px !important;
@@ -1821,24 +2572,20 @@ export default function IndexContent({ htmlContent }: IndexContentProps) {
           
           /* Ajustes para orientação landscape no mobile */
           @media (max-width: 768px) and (orientation: landscape) {
+            .ui-pdp-buy-box-offers__desktop,
+            .ui-pdp-box-container,
+            .ui-pdp-box__container {
+              position: relative !important;
+              box-shadow: none !important;
+              border-top: 1px solid rgba(0,0,0,0.1) !important;
+            }
+            
             .ui-pdp-gallery {
               max-height: 50vh !important;
             }
-          }
-          
-          /* Viewport meta tag fix */
-          @media (max-width: 768px) {
-            html {
-              -webkit-text-size-adjust: 100% !important;
-              -ms-text-size-adjust: 100% !important;
-            }
             
             body {
-              overflow-x: hidden !important;
-            }
-            
-            * {
-              max-width: 100% !important;
+              padding-bottom: 0 !important;
             }
           }
         `
