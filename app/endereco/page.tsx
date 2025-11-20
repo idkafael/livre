@@ -49,113 +49,148 @@ export default function EnderecoPage() {
   }
 
   return (
-    <div className="min-h-screen bg-ml-bg flex flex-col">
-      <header className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 sm:py-4 bg-transparent">
-        <button
-          className="w-8 h-8 sm:w-9 sm:h-9 rounded-[10px] border-none bg-black/30 flex items-center justify-center cursor-pointer flex-shrink-0 hover:bg-black/60 transition-colors"
-          onClick={() => router.back()}
-          aria-label="Voltar"
-        >
-          <svg className="w-4 h-4 sm:w-[18px] sm:h-[18px]" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M15 18l-6-6 6-6" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
-        <h1 className="text-sm sm:text-base m-0 text-[#222] font-normal truncate">Endereço de Entrega</h1>
+    <div className="min-h-screen bg-[#f5f5f5] flex flex-col">
+      {/* Header */}
+      <header className="min-h-[60px] sm:h-[100px] flex items-center px-4 sm:px-5 shadow-[0_1px_0_0_rgba(0,0,0,0.1)]" style={{ backgroundColor: '#fff159' }}>
+        <div className="max-w-[1200px] w-full mx-auto flex justify-between items-center">
+          <a href="/" className="bg-[url('/images/pt_logo_large_plus@2x.webp')] bg-no-repeat bg-contain h-[28px] w-[110px] sm:h-[34px] sm:w-[134px] block" style={{textIndent: '-9999px'}}>Mercado Livre</a>
+          <div className="hidden sm:flex items-center gap-5 text-sm text-black/90">
+            <span>Contato</span>
+          </div>
+        </div>
       </header>
 
-      <main className="py-2 px-3 sm:px-4 flex-1">
-        <form className="max-w-[640px] my-2 mx-auto flex flex-col" onSubmit={handleSubmit}>
-          <p className="font-semibold my-2 mb-3 ml-1 text-[#222] flex items-center gap-2 text-sm sm:text-base">
-            <span className="text-base sm:text-lg">📍</span> Onde deseja receber?
-          </p>
+      {/* Main Content */}
+      <main className="flex-1 flex justify-center items-center py-4 sm:py-10 px-4 sm:px-5">
+        <div className="bg-white rounded-lg p-4 sm:p-6 md:p-10 max-w-[600px] w-full shadow-[0_1px_2px_0_rgba(0,0,0,0.2)]">
+          <h1 className="text-xl sm:text-2xl md:text-[28px] font-normal text-black/90 mb-6 sm:mb-8" style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}>Endereço de entrega</h1>
 
-          <label className="flex flex-col mb-3">
-            <div className="text-xs text-ml-muted mb-1.5">CEP</div>
-            <input
-              inputMode="numeric"
-              pattern="\d{5}-\d{3}"
-              value={cep}
-              onChange={handleCepChange}
-              placeholder="00000-000"
-              className="h-11 px-3 py-2.5 rounded-[10px] border border-ml-border bg-white outline-none text-[15px] text-[#111] shadow-none transition-all duration-75 font-sans placeholder:text-[#cfcfcf] focus:border-ml-blue/70 focus:shadow-[0_6px_18px_rgba(30,108,247,0.08)]"
-            />
-          </label>
-
-          <label className="flex flex-col mb-3">
-            <div className="text-xs text-ml-muted mb-1.5">Rua</div>
-            <input
-              value={rua}
-              onChange={(e) => setRua(e.target.value)}
-              placeholder="Nome da rua"
-              className="h-11 px-3 py-2.5 rounded-[10px] border border-ml-border bg-white outline-none text-[15px] text-[#111] shadow-none transition-all duration-75 font-sans placeholder:text-[#cfcfcf] focus:border-ml-blue/70 focus:shadow-[0_6px_18px_rgba(30,108,247,0.08)]"
-            />
-          </label>
-
-          <div className="flex flex-col sm:flex-row gap-2.5 items-start">
-            <label className="label flex-1 flex flex-col mb-3 w-full sm:w-auto">
-              <div className="text-xs text-ml-muted mb-1.5">Número</div>
+          <form onSubmit={handleSubmit}>
+            {/* CEP */}
+            <label className="flex flex-col mb-4">
+              <span className="text-xs sm:text-sm text-black/55 mb-1.5" style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}>CEP</span>
               <input
-                value={numero}
-                onChange={(e) => setNumero(e.target.value)}
-                placeholder="123"
-                className="h-11 px-3 py-2.5 rounded-[10px] border border-ml-border bg-white outline-none text-[15px] text-[#111] shadow-none transition-all duration-75 font-sans placeholder:text-[#cfcfcf] focus:border-ml-blue/70 focus:shadow-[0_6px_18px_rgba(30,108,247,0.08)]"
+                inputMode="numeric"
+                pattern="\d{5}-\d{3}"
+                value={cep}
+                onChange={handleCepChange}
+                placeholder="00000-000"
+                className="h-11 sm:h-12 px-3 sm:px-4 py-2.5 rounded border border-ml-border bg-white outline-none text-sm sm:text-base text-black/90 transition-all placeholder:text-[rgba(0,0,0,0.25)] focus:border-[#3483fa] focus:shadow-[0_0_0_2px_rgba(52,131,250,0.1)]"
+                style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}
               />
             </label>
 
-            <label className="label flex-1 flex flex-col mb-3 w-full sm:w-auto">
-              <div className="text-xs text-ml-muted mb-1.5">Complemento</div>
+            {/* Rua */}
+            <label className="flex flex-col mb-4">
+              <span className="text-xs sm:text-sm text-black/55 mb-1.5" style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}>Rua</span>
               <input
-                value={complemento}
-                onChange={(e) => setComplemento(e.target.value)}
-                placeholder="Apto 45"
-                className="h-11 px-3 py-2.5 rounded-[10px] border border-ml-border bg-white outline-none text-[15px] text-[#111] shadow-none transition-all duration-75 font-sans placeholder:text-[#cfcfcf] focus:border-ml-blue/70 focus:shadow-[0_6px_18px_rgba(30,108,247,0.08)]"
-              />
-            </label>
-          </div>
-
-          <label className="flex flex-col mb-3">
-            <div className="text-xs text-ml-muted mb-1.5">Bairro</div>
-            <input
-              value={bairro}
-              onChange={(e) => setBairro(e.target.value)}
-              placeholder="Centro"
-              className="h-11 px-3 py-2.5 rounded-[10px] border border-ml-border bg-white outline-none text-[15px] text-[#111] shadow-none transition-all duration-75 font-sans placeholder:text-[#cfcfcf] focus:border-ml-blue/70 focus:shadow-[0_6px_18px_rgba(30,108,247,0.08)]"
-            />
-          </label>
-
-          <div className="flex flex-col sm:flex-row gap-2.5 items-start">
-            <label className="label flex-[2] flex flex-col mb-3 w-full sm:w-auto">
-              <div className="text-xs text-ml-muted mb-1.5">Cidade</div>
-              <input
-                value={cidade}
-                disabled
-                className="h-11 px-3 py-2.5 rounded-[10px] border border-ml-border bg-[#f4f4f4] text-[#666] cursor-not-allowed outline-none text-[15px] shadow-none transition-all duration-75 font-sans"
-                aria-disabled="true"
+                value={rua}
+                onChange={(e) => setRua(e.target.value)}
+                placeholder="Nome da rua"
+                className="h-11 sm:h-12 px-3 sm:px-4 py-2.5 rounded border border-ml-border bg-white outline-none text-sm sm:text-base text-black/90 transition-all placeholder:text-[rgba(0,0,0,0.25)] focus:border-[#3483fa] focus:shadow-[0_0_0_2px_rgba(52,131,250,0.1)]"
+                style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}
               />
             </label>
 
-            <label className="label flex-1 flex flex-col mb-3 w-full sm:w-auto">
-              <div className="text-xs text-ml-muted mb-1.5">UF</div>
+            {/* Número e Complemento */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4">
+              <label className="flex-1 flex flex-col">
+                <span className="text-xs sm:text-sm text-black/55 mb-1.5" style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}>Número</span>
+                <input
+                  value={numero}
+                  onChange={(e) => setNumero(e.target.value)}
+                  placeholder="123"
+                  className="h-11 sm:h-12 px-3 sm:px-4 py-2.5 rounded border border-ml-border bg-white outline-none text-sm sm:text-base text-black/90 transition-all placeholder:text-[rgba(0,0,0,0.25)] focus:border-[#3483fa] focus:shadow-[0_0_0_2px_rgba(52,131,250,0.1)]"
+                  style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}
+                />
+              </label>
+
+              <label className="flex-1 flex flex-col">
+                <span className="text-xs sm:text-sm text-black/55 mb-1.5" style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}>Complemento</span>
+                <input
+                  value={complemento}
+                  onChange={(e) => setComplemento(e.target.value)}
+                  placeholder="Apto 45"
+                  className="h-11 sm:h-12 px-3 sm:px-4 py-2.5 rounded border border-ml-border bg-white outline-none text-sm sm:text-base text-black/90 transition-all placeholder:text-[rgba(0,0,0,0.25)] focus:border-[#3483fa] focus:shadow-[0_0_0_2px_rgba(52,131,250,0.1)]"
+                  style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}
+                />
+              </label>
+            </div>
+
+            {/* Bairro */}
+            <label className="flex flex-col mb-4">
+              <span className="text-xs sm:text-sm text-black/55 mb-1.5" style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}>Bairro</span>
               <input
-                value={uf}
-                disabled
-                className="h-11 px-3 py-2.5 rounded-[10px] border border-ml-border bg-[#f4f4f4] text-[#666] cursor-not-allowed outline-none text-[15px] shadow-none transition-all duration-75 font-sans"
-                aria-disabled="true"
+                value={bairro}
+                onChange={(e) => setBairro(e.target.value)}
+                placeholder="Centro"
+                className="h-11 sm:h-12 px-3 sm:px-4 py-2.5 rounded border border-ml-border bg-white outline-none text-sm sm:text-base text-black/90 transition-all placeholder:text-[rgba(0,0,0,0.25)] focus:border-[#3483fa] focus:shadow-[0_0_0_2px_rgba(52,131,250,0.1)]"
+                style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}
               />
             </label>
-          </div>
 
-          <div className="h-[84px]" />
-        </form>
+            {/* Cidade e UF */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6">
+              <label className="flex-[2] flex flex-col">
+                <span className="text-xs sm:text-sm text-black/55 mb-1.5" style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}>Cidade</span>
+                <input
+                  value={cidade}
+                  disabled
+                  className="h-11 sm:h-12 px-3 sm:px-4 py-2.5 rounded border border-ml-border bg-[#f5f5f5] text-black/45 cursor-not-allowed outline-none text-sm sm:text-base"
+                  style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}
+                />
+              </label>
+
+              <label className="flex-1 flex flex-col">
+                <span className="text-xs sm:text-sm text-black/55 mb-1.5" style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}>UF</span>
+                <input
+                  value={uf}
+                  disabled
+                  className="h-11 sm:h-12 px-3 sm:px-4 py-2.5 rounded border border-ml-border bg-[#f5f5f5] text-black/45 cursor-not-allowed outline-none text-sm sm:text-base"
+                  style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}
+                />
+              </label>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <button 
+                type="button"
+                className="flex-1 py-3 sm:py-3.5 px-4 sm:px-6 rounded-md text-sm sm:text-base font-semibold cursor-pointer border-none transition-colors bg-ml-border text-black/90 hover:bg-[#d4d4d4]" 
+                onClick={() => router.back()}
+              >
+                Voltar
+              </button>
+              <button 
+                type="submit"
+                className="flex-1 py-3 sm:py-3.5 px-4 sm:px-6 rounded-md text-sm sm:text-base font-semibold cursor-pointer border-none transition-colors bg-[#3483fa] text-white hover:bg-[#2968c8]"
+              >
+                Continuar
+              </button>
+            </div>
+          </form>
+        </div>
       </main>
 
-      <footer className="sticky bottom-0 py-3 px-3 sm:px-4 bg-gradient-to-t from-ml-bg to-transparent flex justify-center shadow-[0_-6px_18px_rgba(0,0,0,0.03)]">
-        <button
-          className="w-full max-w-[640px] h-[48px] sm:h-[52px] bg-ml-blue text-white border-none rounded-xl text-sm sm:text-base font-semibold cursor-pointer shadow-[0_6px_12px_rgba(30,108,247,0.18)] transition-transform duration-100 hover:bg-ml-blue-hover active:translate-y-px"
-          onClick={handleSubmit}
-        >
-          Continuar
-        </button>
+      {/* Footer Links */}
+      <footer className="bg-white border-t border-ml-border py-3 sm:py-4 px-4 sm:px-5 mt-auto">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="flex flex-wrap gap-2 sm:gap-4 mb-2">
+            <a href="#" className="text-black/90 no-underline text-[13px] hover:underline">Trabalhe conosco</a>
+            <a href="#" className="text-black/90 no-underline text-[13px] hover:underline">Termos e condições</a>
+            <a href="#" className="text-black/90 no-underline text-[13px] hover:underline">Promoções</a>
+            <a href="#" className="text-black/90 no-underline text-[13px] hover:underline">Como cuidamos da sua privacidade</a>
+            <a href="#" className="text-black/90 no-underline text-[13px] hover:underline">Acessibilidade</a>
+            <a href="#" className="text-black/90 no-underline text-[13px] hover:underline">Contato</a>
+            <a href="#" className="text-black/90 no-underline text-[13px] hover:underline">Informações sobre seguros</a>
+            <a href="#" className="text-black/90 no-underline text-[13px] hover:underline">Programa de Afiliados</a>
+            <a href="#" className="text-black/90 no-underline text-[13px] hover:underline">Lista de presentes</a>
+          </div>
+          <div className="text-xs text-black/55 mt-2">
+            Copyright © 1999-2025 Ebazar.com.br LTDA.<br />
+            CNPJ n.º 03.007.331/0001-41 / Av. das Nações Unidas, nº 3.003, Bonfim, Osasco/SP - CEP 06233-903 - empresa do grupo Mercado Livre.
+          </div>
+        </div>
       </footer>
     </div>
   )

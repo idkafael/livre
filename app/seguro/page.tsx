@@ -78,7 +78,7 @@ export default function SeguroPage() {
             Ao adicionar, você aceita as <a href="#" className="text-[#3483fa] no-underline hover:underline">Condições gerais</a> e os <a href="#" className="text-[#3483fa] no-underline hover:underline">Termos de cobrança do Prêmio do seguro</a>.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4">
             <button className="flex-1 py-3 sm:py-3.5 px-4 sm:px-6 rounded-md text-sm sm:text-base font-semibold cursor-pointer border-none transition-colors bg-ml-border text-black/90 hover:bg-[#d4d4d4]" onClick={() => router.push('/')}>Agora não</button>
             <button className="flex-1 py-3 sm:py-3.5 px-4 sm:px-6 rounded-md text-sm sm:text-base font-semibold cursor-pointer border-none transition-colors bg-[#3483fa] text-white hover:bg-[#2968c8]" onClick={() => {
               // Salvar seguro escolhido no localStorage
@@ -91,6 +91,23 @@ export default function SeguroPage() {
               }
               router.push('/entrega')
             }}>Adicionar</button>
+          </div>
+
+          {/* Continuar sem garantia */}
+          <div className="text-center">
+            <button 
+              onClick={() => {
+                // Limpar qualquer seguro salvo
+                if (typeof window !== 'undefined') {
+                  localStorage.removeItem('selectedInsurance')
+                }
+                router.push('/entrega')
+              }}
+              className="text-[#3483fa] text-sm font-semibold hover:underline transition-colors" 
+              style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 600 }}
+            >
+              Continuar sem garantia
+            </button>
           </div>
         </div>
       </main>
