@@ -917,14 +917,15 @@ export default function ProductSection() {
 
             {/* Review Photos */}
             <div className="flex gap-2 mb-4 overflow-x-auto">
-              {[1, 2, 3, 4, 5].map((num) => (
+              {[1, 2, 3].map((num) => (
                 <div key={num} className="relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-[#f5f5f5] cursor-pointer hover:opacity-90 transition-opacity">
                   <Image
-                    src={`/images/feedbackcommentario-${num <= 3 ? num : num - 3}.png`}
+                    src={`/images/feedbackcommentario-${num}.png`}
                     alt={`Foto da review ${num}`}
                     fill
                     className="object-cover"
                     sizes="80px"
+                    unoptimized
                   />
                 </div>
               ))}
