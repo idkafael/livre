@@ -1503,7 +1503,347 @@ export default function IndexContent({ htmlContent }: IndexContentProps) {
 
   return (
     <>
-      {/* Não adicionar estilos customizados - usar apenas os estilos do HTML original */}
+      {/* Estilos responsivos para mobile */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          /* Estilos globais para responsividade */
+          * {
+            box-sizing: border-box !important;
+          }
+          
+          html, body {
+            width: 100% !important;
+            max-width: 100vw !important;
+            overflow-x: hidden !important;
+          }
+          
+          /* Responsividade Mobile - Melhorias adicionais */
+          @media (max-width: 768px) {
+            /* Container principal */
+            .ui-pdp-container,
+            .ui-pdp-container__row,
+            .ui-pdp,
+            main,
+            #root-app {
+              flex-direction: column !important;
+              padding: 0 12px !important;
+              width: 100% !important;
+              max-width: 100% !important;
+              margin: 0 !important;
+            }
+            
+            /* Garantir que o body não ultrapasse */
+            body > div,
+            #__next,
+            #root {
+              width: 100% !important;
+              max-width: 100vw !important;
+              overflow-x: hidden !important;
+            }
+            
+            /* Colunas */
+            .ui-pdp-container__col {
+              width: 100% !important;
+              max-width: 100% !important;
+              padding-left: 0 !important;
+              padding-right: 0 !important;
+            }
+            
+            /* Galeria de imagens */
+            .ui-pdp-gallery,
+            .ui-pdp-gallery__column {
+              width: 100% !important;
+              max-width: 100% !important;
+            }
+            
+            .ui-pdp-gallery__figure__image {
+              max-width: 100% !important;
+              height: auto !important;
+            }
+            
+            /* Box de compra */
+            .ui-pdp-box-container,
+            .ui-pdp-box__container,
+            .ui-pdp-buy-box-offers__desktop {
+              width: 100% !important;
+              max-width: 100% !important;
+              margin: 0 !important;
+              padding: 12px !important;
+              position: relative !important;
+            }
+            
+            /* Preço */
+            .ui-pdp-price {
+              font-size: 28px !important;
+            }
+            
+            .ui-pdp-price__second-line {
+              font-size: 14px !important;
+            }
+            
+            /* Título do produto */
+            .ui-pdp-header__title,
+            .ui-pdp-title {
+              font-size: 20px !important;
+              line-height: 1.3 !important;
+              margin-bottom: 12px !important;
+              word-wrap: break-word !important;
+            }
+            
+            /* Botões de ação */
+            .ui-pdp-action--primary,
+            .ui-pdp-action--secondary,
+            .andes-button {
+              width: 100% !important;
+              padding: 14px 20px !important;
+              font-size: 16px !important;
+              margin-bottom: 12px !important;
+            }
+            
+            /* Navegação */
+            .nav-header,
+            .nav-bounds,
+            .nav-header-plus {
+              padding: 0 12px !important;
+              width: 100% !important;
+              max-width: 100% !important;
+            }
+            
+            .nav-area {
+              width: 100% !important;
+              flex-wrap: wrap !important;
+            }
+            
+            .nav-search {
+              width: 100% !important;
+              max-width: 100% !important;
+              margin: 8px 0 !important;
+            }
+            
+            .nav-search-input {
+              font-size: 14px !important;
+              padding: 10px 12px !important;
+              width: 100% !important;
+            }
+            
+            .nav-menu-list {
+              flex-wrap: wrap !important;
+              font-size: 12px !important;
+            }
+            
+            .nav-menu-item {
+              font-size: 12px !important;
+              padding: 4px 8px !important;
+            }
+            
+            /* Breadcrumb */
+            .ui-pdp-breadcrumb {
+              font-size: 12px !important;
+              padding: 8px 0 !important;
+            }
+            
+            /* Variações */
+            .ui-pdp-variations {
+              width: 100% !important;
+            }
+            
+            .ui-pdp-variations__picker {
+              width: 100% !important;
+              margin-bottom: 16px !important;
+            }
+            
+            /* Descrição */
+            .ui-pdp-description {
+              font-size: 14px !important;
+              line-height: 1.6 !important;
+              padding: 12px !important;
+            }
+            
+            /* Características */
+            .ui-vpp-highlighted-specs,
+            .ui-vpp-striped-specs {
+              font-size: 14px !important;
+              padding: 12px !important;
+            }
+            
+            /* Tabelas */
+            .andes-table {
+              font-size: 13px !important;
+            }
+            
+            .andes-table th,
+            .andes-table td {
+              padding: 8px 4px !important;
+            }
+            
+            /* Seções */
+            .ui-pdp-section {
+              padding: 12px 0 !important;
+            }
+            
+            /* Imagens responsivas */
+            img {
+              max-width: 100% !important;
+              height: auto !important;
+            }
+            
+            /* Formulários */
+            input,
+            select,
+            textarea {
+              font-size: 16px !important;
+              padding: 12px !important;
+              width: 100% !important;
+            }
+            
+            /* Vendedor */
+            .ui-pdp-seller {
+              padding: 12px !important;
+            }
+            
+            /* Reviews */
+            .ui-review-capability {
+              padding: 12px !important;
+            }
+            
+            /* Carrosséis */
+            .andes-carousel-snapped__container {
+              padding: 0 8px !important;
+            }
+            
+            /* Cards */
+            .andes-card {
+              margin-bottom: 12px !important;
+              padding: 12px !important;
+            }
+            
+            /* Espaçamentos reduzidos */
+            .ui-pdp-spacing,
+            .mt-24,
+            .mb-24,
+            .pb-40 {
+              margin-top: 12px !important;
+              margin-bottom: 12px !important;
+              padding-bottom: 20px !important;
+            }
+            
+            /* Ocultar elementos desnecessários no mobile */
+            .ui-pdp-desktop-only {
+              display: none !important;
+            }
+            
+            /* Ajustes de layout */
+            .ui-pdp-container__row {
+              flex-wrap: wrap !important;
+              margin: 0 !important;
+            }
+            
+            /* Sticky wrapper */
+            .ui-pdp--sticky-wrapper,
+            .ui-pdp--sticky-wrapper-center,
+            .ui-pdp--sticky-wrapper-right {
+              position: relative !important;
+              top: auto !important;
+            }
+            
+            /* Menu de navegação */
+            .nav-menu-list {
+              flex-wrap: wrap !important;
+            }
+            
+            .nav-menu-item {
+              font-size: 13px !important;
+            }
+            
+            /* Listas e itens */
+            .andes-list,
+            .ui-pdp-buy-box-offers__offer-list {
+              width: 100% !important;
+            }
+            
+            /* Formulários */
+            form {
+              width: 100% !important;
+              max-width: 100% !important;
+            }
+            
+            /* Footer */
+            .nav-footer,
+            .nav-footer-seo {
+              padding: 12px !important;
+              font-size: 12px !important;
+            }
+            
+            /* Garantir que nenhum elemento ultrapasse */
+            .ui-pdp-container__col.col-1,
+            .ui-pdp-container__col.col-2,
+            .ui-pdp-container__col.col-3,
+            .ui-pdp-container__col.col-6 {
+              width: 100% !important;
+              max-width: 100% !important;
+              flex: 1 1 100% !important;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            /* Ajustes para telas muito pequenas */
+            body {
+              font-size: 13px !important;
+            }
+            
+            .ui-pdp-container,
+            .ui-pdp-box-container {
+              padding: 0 8px !important;
+            }
+            
+            .ui-pdp-header__title {
+              font-size: 18px !important;
+            }
+            
+            .ui-pdp-price {
+              font-size: 24px !important;
+            }
+            
+            .ui-pdp-action--primary,
+            .ui-pdp-action--secondary {
+              padding: 12px 16px !important;
+              font-size: 15px !important;
+            }
+            
+            .ui-pdp-section {
+              padding: 8px 0 !important;
+            }
+            
+            .nav-header {
+              padding: 8px !important;
+            }
+          }
+          
+          /* Ajustes para orientação landscape no mobile */
+          @media (max-width: 768px) and (orientation: landscape) {
+            .ui-pdp-gallery {
+              max-height: 50vh !important;
+            }
+          }
+          
+          /* Viewport meta tag fix */
+          @media (max-width: 768px) {
+            html {
+              -webkit-text-size-adjust: 100% !important;
+              -ms-text-size-adjust: 100% !important;
+            }
+            
+            body {
+              overflow-x: hidden !important;
+            }
+            
+            * {
+              max-width: 100% !important;
+            }
+          }
+        `
+      }} />
+      
       {/* Injetar conteúdo do head */}
       {headContent && (
         <div dangerouslySetInnerHTML={{ __html: headContent }} style={{ display: 'none' }} />
@@ -1513,6 +1853,7 @@ export default function IndexContent({ htmlContent }: IndexContentProps) {
         <div 
           dangerouslySetInnerHTML={{ __html: bodyContent }}
           suppressHydrationWarning
+          style={{ width: '100%', overflowX: 'hidden' }}
         />
       )}
       {/* Script inline para substituir superscript "21" por "90" - executar após renderização */}
