@@ -11,8 +11,38 @@ export default function EnderecoPage() {
   const [numero, setNumero] = useState('')
   const [complemento, setComplemento] = useState('')
   const [bairro, setBairro] = useState('')
-  const cidade = 'São Paulo'
-  const uf = 'SP'
+  const [cidade, setCidade] = useState('')
+  const [uf, setUf] = useState('SP')
+
+  const estados = [
+    { sigla: 'AC', nome: 'Acre' },
+    { sigla: 'AL', nome: 'Alagoas' },
+    { sigla: 'AP', nome: 'Amapá' },
+    { sigla: 'AM', nome: 'Amazonas' },
+    { sigla: 'BA', nome: 'Bahia' },
+    { sigla: 'CE', nome: 'Ceará' },
+    { sigla: 'DF', nome: 'Distrito Federal' },
+    { sigla: 'ES', nome: 'Espírito Santo' },
+    { sigla: 'GO', nome: 'Goiás' },
+    { sigla: 'MA', nome: 'Maranhão' },
+    { sigla: 'MT', nome: 'Mato Grosso' },
+    { sigla: 'MS', nome: 'Mato Grosso do Sul' },
+    { sigla: 'MG', nome: 'Minas Gerais' },
+    { sigla: 'PA', nome: 'Pará' },
+    { sigla: 'PB', nome: 'Paraíba' },
+    { sigla: 'PR', nome: 'Paraná' },
+    { sigla: 'PE', nome: 'Pernambuco' },
+    { sigla: 'PI', nome: 'Piauí' },
+    { sigla: 'RJ', nome: 'Rio de Janeiro' },
+    { sigla: 'RN', nome: 'Rio Grande do Norte' },
+    { sigla: 'RS', nome: 'Rio Grande do Sul' },
+    { sigla: 'RO', nome: 'Rondônia' },
+    { sigla: 'RR', nome: 'Roraima' },
+    { sigla: 'SC', nome: 'Santa Catarina' },
+    { sigla: 'SP', nome: 'São Paulo' },
+    { sigla: 'SE', nome: 'Sergipe' },
+    { sigla: 'TO', nome: 'Tocantins' }
+  ]
 
   const handleCepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value.replace(/\D/g, '').slice(0, 8)
@@ -26,7 +56,7 @@ export default function EnderecoPage() {
       e.preventDefault()
     }
 
-    if (!rua || !numero || !bairro) {
+    if (!rua || !numero || !bairro || !cidade || !uf) {
       alert('Por favor, preencha todos os campos obrigatórios')
       return
     }
@@ -135,20 +165,27 @@ export default function EnderecoPage() {
                 <span className="text-xs sm:text-sm text-black/55 mb-1.5" style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}>Cidade</span>
                 <input
                   value={cidade}
-                  disabled
-                  className="h-11 sm:h-12 px-3 sm:px-4 py-2.5 rounded border border-ml-border bg-[#f5f5f5] text-black/45 cursor-not-allowed outline-none text-sm sm:text-base"
+                  onChange={(e) => setCidade(e.target.value)}
+                  placeholder="Nome da cidade"
+                  className="h-11 sm:h-12 px-3 sm:px-4 py-2.5 rounded border border-ml-border bg-white outline-none text-sm sm:text-base text-black/90 transition-all placeholder:text-[rgba(0,0,0,0.25)] focus:border-[#3483fa] focus:shadow-[0_0_0_2px_rgba(52,131,250,0.1)]"
                   style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}
                 />
               </label>
 
               <label className="flex-1 flex flex-col">
-                <span className="text-xs sm:text-sm text-black/55 mb-1.5" style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}>UF</span>
-                <input
+                <span className="text-xs sm:text-sm text-black/55 mb-1.5" style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}>Estado</span>
+                <select
                   value={uf}
-                  disabled
-                  className="h-11 sm:h-12 px-3 sm:px-4 py-2.5 rounded border border-ml-border bg-[#f5f5f5] text-black/45 cursor-not-allowed outline-none text-sm sm:text-base"
+                  onChange={(e) => setUf(e.target.value)}
+                  className="h-11 sm:h-12 px-3 sm:px-4 py-2.5 rounded border border-ml-border bg-white outline-none text-sm sm:text-base text-black/90 transition-all focus:border-[#3483fa] focus:shadow-[0_0_0_2px_rgba(52,131,250,0.1)] cursor-pointer"
                   style={{ fontFamily: 'Proxima Nova, -apple-system, Roboto, Arial, sans-serif', fontWeight: 400 }}
-                />
+                >
+                  {estados.map((estado) => (
+                    <option key={estado.sigla} value={estado.sigla}>
+                      {estado.sigla}
+                    </option>
+                  ))}
+                </select>
               </label>
             </div>
 
